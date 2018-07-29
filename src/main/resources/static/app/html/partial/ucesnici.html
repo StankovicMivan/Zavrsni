@@ -1,0 +1,105 @@
+<div ng-controller="UcesniciCtrl">
+
+
+	<div class="page-header">
+		<h1>Ucesnici</h1>
+	</div>
+
+	<form>
+		<div class="form-group">
+			<label for="naziv">Naziv</label> <input class="form-control"
+				id="naziv" ng-model="noviUcesnik.naziv" placeholder="Naziv">
+		</div>
+		<div class="form-group">
+			<label for="mesto">Mesto</label> <input class="form-control"
+				id="mesto" ng-model="noviUcesnik.mesto" placeholder="Mesto">
+		</div>
+		<div class="form-group">
+			<label for="kontakt">Kontakt</label> <input class="form-control"
+				id="kontakt" ng-model="noviUcesnik.kontakt" placeholder="E-mail">
+		</div>
+
+		<div class="form-group">
+			<label for="takmicenja">Takmicenje</label> <select
+				class="form-control" id="takmicenja"
+				ng-model="noviUcesnik.takmicenjeId">
+				<option ng-repeat="t in takmicenja" value="{{t.id}}">
+					{{t.naziv}}
+				</option>
+			</select>
+		</div>
+		<button class="btn btn-primary" ng-click="dodaj()">Dodaj</button>
+
+	</form>
+
+	<form>
+
+		<div class="form-group">
+			<label for="takmicenjeId">Takmicenja</label> <select
+				class="form-control" id="takmicenjeId"
+				ng-model="pPretrage.takmicenjeId">
+				<option ng-repeat="t in takmicenja" value="{{t.id}}">
+					{{t.naziv}}
+				</option>
+			</select>
+		</div>
+		<div ng-show="prikazi">
+			<div class="form-group">
+				<label for="naziv">Naziv</label> <input ng-model="pPretrage.naziv"
+					class="form-control" id="naziv">
+			</div>
+		</div>
+		<button ng-disabled="pPretrage.takmicenjeId ==''" ng-click="pretraga()" class="btn btn-primary">Pretraži</button>
+	</form>
+
+	<div ng-show="prikazi">
+
+		<div>
+			<div class="btn-group pull-left">
+
+			<div class="pull-right">
+				<button ng-click="goToDodaj()" class="btn btn-primary">Dodaj rezultat</button>
+			</div>
+
+		</div>
+		<div class="btn-group pull-right">
+
+			<div class="pull-right">
+				<button ng-disabled="pageNum == 0" ng-click="go(-1)"
+					class="btn btn-primary">Prethodna</button>
+				<button ng-disabled="pageNum == totalPages - 1" ng-click="go(1)"
+					class="btn btn-primary">Sledeća</button>
+			</div>
+
+		</div>
+	</div>
+
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Naziv</th>
+				<th>Mesto</th>
+				<th>Kontakt</th>
+				<th>Takmicenje</th>
+				<th>Odigranih susreta</th>
+				<th>Bodovi</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="u in ucesnici">
+				<td>{{u.naziv}}</td>
+				<td>{{u.mesto}}</td>
+				<td>{{u.kontakt}}</td>
+				<td>{{u.takmicenjeNaziv}}</td>
+				<td>{{u.odigranoSusreta}}</td>
+				<td>{{u.brojBodova}}</td>
+				<td>
+					<button class="btn btn-danger" ng-click="delete(u.id)">Obriši</button>
+					<button class="btn btn-warning" ng-click="goToEdit(u.id)">Izmeni</button>
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>

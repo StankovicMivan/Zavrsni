@@ -1,0 +1,32 @@
+<div ng-controller="addRezultatCtrl">
+	<h1>Dodavanje rezultata</h1>
+	<form class="row">
+	<div class="form-group">
+		<label for="ucesnik1">Ucesnik 1</label>
+		<select class="form-control" id="ucesnik1" ng-model="rezultatUtakmice.idPrvog">
+				<option ng-repeat="t in ucesnici" value="{{t.id}}">
+					{{t.naziv}}
+				</option>
+			</select>
+	</div>
+	<div class="form-group">
+		<label for="ucesnik2">Ucesnik 2</label>
+	 <select class="form-control" id="ucesnik2" ng-model="rezultatUtakmice.idDrugog">
+				<option ng-repeat="t in ucesnici" value="{{t.id}}">
+					{{t.naziv}}
+				</option>
+			</select>
+	<div class="form-group">
+		<label for="rez">Rezultat</label>
+		<select class="form-control" id="rez" ng-model="rezultat.zvanicno">
+				<option value="1">{{rezultat.prvoname}}</option>
+				<option value="2">{{rezultat.drugoname}}</option>
+				<option value="3">{{rezultat.trecename}}</option>
+			</select>
+	</div>
+
+		<button class="btn btn-warning" ng-click="izmeni()">Sačuvaj</button>
+		<button class="btn btn-primary" ng-click="nazad()">Nazad</button>
+	</form>
+
+</div>
